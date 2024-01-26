@@ -1,0 +1,37 @@
+logging:
+  level:
+    org.springframework.context: INFO
+    com.zyniel.apps.westiemosaic: INFO
+
+spring:
+  datasource:
+    url: jdbc:h2:file:./data/eventsdb
+    username: ${DATASOURCE_USERNAME:sa}
+    password: ${DATASOURCE_PASSWORD:password}
+    driverClassName: ${DATASOURCE_DRIVER:org.h2.Driver}
+
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+      settings:
+        trace: false
+        web-allow-others: false
+
+  jpa:
+    defer-datasource-initialization: false
+    hibernate.ddl-auto: update
+    show-sql: false
+
+scheduler:
+  enabled: true
+  pool:
+    size: 5
+  thread:
+    name:
+      prefix: task-
+  parser:
+    startup.enabled: true
+    periodic:
+      enabled: true
+      cron: 0 0 0 * * ?
